@@ -99,7 +99,7 @@ def split_char(img):
     char_4 = padding(char_4)
 
 
-    cv2.imwrite("char1.png", (char_1))
+    cv2.imwrite("char2.png", (char_2))
     return char_1, char_2, char_3, char_4
 
 split_char("vx.png")
