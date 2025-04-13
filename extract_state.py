@@ -67,7 +67,7 @@ def extract_state(img, r_target, b_target, g_target):
             cv2.imwrite( "x.png", new_arr)
 
         elif count == 1:
-            cv2.imwrite( "y.png", new_arr)
+            cv2.imwrite("y.png", new_arr)
 
         elif count == 2:
             cv2.imwrite( "vx.png", new_arr)
@@ -77,7 +77,7 @@ def extract_state(img, r_target, b_target, g_target):
             cv2.imwrite( "d.png", new_arr)
         count += 1
 
-def split_char(img):
+def split_char(img, index, SS_name):
     arr = cv2.imread(img)
     arr = arr[arr.shape[0] - arr.shape[0]//10:, :]#cropped
     print(arr.shape)
@@ -98,9 +98,17 @@ def split_char(img):
     char_3 = padding(char_3)
     char_4 = padding(char_4)
 
+    if index == 1:
+        cv2.imwrite("chars data/" + SS_name + img + " char_1.png", (char_1))
 
-    cv2.imwrite("char2.png", (char_2))
-    return char_1, char_2, char_3, char_4
+    elif index == 2:
+        cv2.imwrite("chars data/" + SS_name + img + " char_2.png", (char_2))
 
-split_char("vx.png")
-#extract_state(img="SS/5.png", r_target=131, b_target=156, g_target=118)
+    elif index == 3:
+        cv2.imwrite("chars data/" +SS_name + img +" char_3.png", (char_3))
+
+    else:
+        cv2.imwrite("chars data/" +SS_name + img +" char_4.png", (char_4))
+
+#split_char("vx.png")
+#extract_state(img="SS/14.png", r_target=131, b_target=156, g_target=118)

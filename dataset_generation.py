@@ -18,25 +18,25 @@ def split_char_individual(img, output):
     mult = arr.shape[1] / 128
     char_1 = arr[:, i: math.ceil(i+4*mult),:]
     char_1 = padding(char_1)
-    for i in range(char_1.shape[0]):
-        for j in range(char_1.shape[1]):
-                prob = random.random()
-                if prob < 0.001:
-                    for k in range(3):
-                        char_1[i, j,k ] = 255 - char_1[i, j,k ]
 
     cv2.imwrite(output, char_1)
 
 
-y = []
 
-for i in range(0, len(os.listdir("Dataset"))):
-    for k in range(50):
-        split_char_individual(img="Dataset/" + os.listdir("Dataset")[i],
-                              output="chars data/" + str(len(y)) +".png")
-        y.append(os.listdir("Dataset")[i][0])
+for f in range(0, len(os.listdir("data"))):
+    image = os.listdir("data")[f]
+
+    for l in range(10):
+        new_name = image.strip(".png") + " " + str(l) + ".png"
+        char = cv2.imread("data/" + image)
+        for i in range(char.shape[0]):
+            for j in range(char.shape[1]):
+                prob = random.random()
+                if prob < 0.01:
+                    for k in range(3):
+                        char[i, j, k] = 255 - char[i, j, k]
+
+        cv2.imwrite("Aug Data/"+new_name, char)
 
 
-df = pd.DataFrame()
-df["y"] = y
-df.to_csv('out.csv', index=False)
+
